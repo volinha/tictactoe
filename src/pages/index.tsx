@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import Head from "next/head";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +32,7 @@ export default function Home() {
   const [isEnded, setIsEnded] = useState(false);
 
   function handleClick(index: number) {
-    if(isEnded) return alert("Game ended! Press Reset!");
+    if(isEnded) return toast.error("😕 Game ended! Press Reset!");
     if (gameArray[index].status === 0 ) {
       player === 1 ? setPlayer(2) : setPlayer(1); // change player
       const newGameArray = [...gameArray];
@@ -39,7 +40,7 @@ export default function Home() {
       setGameArray(newGameArray);
       checkWinner();
     } else {
-      alert("This position is already taken");
+      toast.error("😕 This position is already taken!");
       return;
     }
   }
@@ -52,14 +53,14 @@ export default function Home() {
           gameArray[a].status === gameArray[b].status &&
           gameArray[b].status === gameArray[c].status
         ) {
-          alert("Player " + gameArray[a].status === "1" ? "X" : "O" + " won");
+          toast.success("🎉 Player " + (gameArray[a].status === 1 ? "X" : "O") + " won");
           setIsEnded(true);
           return;
         }
       }
     }
     if(!isEnded && gameArray.every(item => item.status !== 0)){
-      alert("Draw");
+      toast("😢 That's a draw! Press Reset to play again!");
       setIsEnded(true);
     }
 
@@ -71,6 +72,7 @@ export default function Home() {
       <Head>
         <title>TicTacToe</title>
       </Head>
+      <Toaster />
       <main className='h-screen flex items-center justify-center'>
         <div className='flex flex-col'>
           <div className='grid grid-cols-3 gap-3'>

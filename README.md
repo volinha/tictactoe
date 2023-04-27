@@ -11,7 +11,7 @@ npm run dev
 
 ## Future updates
 
-- [ ] Change alert to toasts
+- [x] Change alert to toasts
 - [ ] Add a local scoreboard
 - [x] Implement draw
 - [ ] Better styling
