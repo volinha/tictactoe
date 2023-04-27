@@ -58,6 +58,12 @@ export default function Home() {
         }
       }
     }
+    if(!isEnded && gameArray.every(item => item.status !== 0)){
+      alert("Draw");
+      setIsEnded(true);
+    }
+
+    
   }
 
   return (
